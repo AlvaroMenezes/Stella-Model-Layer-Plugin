@@ -1,5 +1,5 @@
 <idea-plugin>
-  <id>com.your.company.unique.plugin.id</id>
+  <id>com.alvaromenezes.stella</id>
   <name>Stella Model Layer</name>
   <version>1.0</version>
   <vendor email="support@yourcompany.com" url="http://www.yourcompany.com">YourCompany</vendor>
@@ -30,7 +30,7 @@
 
   <actions>
     <!-- Add your actions here -->
-    <action id="CreateAction" class="com.alvaromenezes.stella.CreateAction" text="Stella Model Layer"
+    <action id="CreateAction" class="com.alvaromenezes.stella.action.CreateAction" text="Stella Model Layer"
             description="create xpto" icon="/icons/star_icon.png">
       <add-to-group group-id="ToolsMenu" anchor="last"/>
       <add-to-group group-id="MainToolBar" anchor="last"/>
