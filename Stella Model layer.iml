@@ -10,5 +10,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="JsonModelParser0.0.1" level="project" />
+    <orderEntry type="library" name="jackson-annotations-2.9.0.pr3" level="project" />
+    <orderEntry type="library" name="okhttp-3.8.0" level="project" />
   </component>
 </module>

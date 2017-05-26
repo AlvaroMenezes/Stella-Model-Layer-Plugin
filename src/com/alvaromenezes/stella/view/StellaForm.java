@@ -1,5 +1,8 @@
 package com.alvaromenezes.stella.view;
 
+import com.alvaromenezes.stella.controller.StellaFormController;
+import com.alvaromenezes.stella.util.FileUtil;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,8 +13,8 @@ import java.awt.event.ActionListener;
 public class StellaForm implements ActionListener{
 
 
-    JTextField txtPath;
-    JTextField txtURL;
+    public JTextField txtPath;
+    public JTextField txtURL;
     public JPanel panelMain;
     private JButton btnPath;
     private JButton btnGenerate;
@@ -19,6 +22,7 @@ public class StellaForm implements ActionListener{
     public StellaForm() {
         btnGenerate.addActionListener(this);
         btnPath.addActionListener(this);
+
     }
 
     @Override
@@ -32,9 +36,17 @@ public class StellaForm implements ActionListener{
     }
 
     private void setFilePath() {
-    }
+
+       new StellaFormController(this).setPath();
+     }
+
+
+
+
 
     private void onGenerate() {
+
+       new StellaFormController( this).generate();
 
     }
 }
