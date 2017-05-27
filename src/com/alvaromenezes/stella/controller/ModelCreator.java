@@ -13,16 +13,12 @@ public class ModelCreator {
 
     private ModelLayer modelLayer;
 
-    public ModelCreator(String json){
+    public ModelCreator(String json) {
         this.modelLayer = new ProcessJSON().getModelLayer(json);
     }
 
 
-
-
-    public  void create(){
-
-
+    public void create() {
 
 
         for (Entity e : modelLayer.entities) {
@@ -44,10 +40,6 @@ public class ModelCreator {
 
 
     }
-
-
-
-
 
 
 }

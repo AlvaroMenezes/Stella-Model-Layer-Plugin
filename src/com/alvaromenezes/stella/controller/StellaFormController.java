@@ -3,8 +3,7 @@ package com.alvaromenezes.stella.controller;
 import com.alvaromenezes.stella.util.FileUtil;
 import com.alvaromenezes.stella.view.StellaForm;
 
-import javax.swing.*;
-import javax.swing.filechooser.FileSystemView;
+import java.io.IOException;
 
 /**
  * Created by alvaromenezes on 5/26/17.
@@ -19,88 +18,79 @@ public class StellaFormController {
 
         this.view = view;
 
-
     }
 
 
-    public void setPath() {
-        JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-        jfc.setDialogTitle("Choose a JSON file");
-        jfc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+    private boolean isEmpty() {
 
-        int returnValue = jfc.showOpenDialog(view.panelMain);
-        if (returnValue == JFileChooser.APPROVE_OPTION) {
-            view.txtPath.setText(jfc.getSelectedFile().getAbsolutePath());
-        }
+        return view.txtPath.getText().trim().isEmpty() &&
+                view.txtURL.getText().trim().isEmpty();
     }
 
 
-    private boolean isEmpty(){
-
-      return   view.txtPath.getText().trim().isEmpty() &&
-                    view.txtURL.getText().trim().isEmpty();
-    }
+    public void generate() {
 
 
-
-    public void generate(){
-
-        if(isEmpty()){
-            showMessage("Add an URL or a file path!", "Stella Model Layer");
+        if (isEmpty()) {
+            view.showMessage("Add an URL or a file path!");
             return;
         }
 
-        generateByFile();
+        if(view.txtURL.getText().isEmpty()) {
+            generateByFile();
+        }else {
+
+            generateByURL();
+        }
+
+        view.showMessage("Done!");
 
     }
 
-    private void generateByFile(){
+    private void generateByFile() {
 
         String path = view.txtPath.getText().trim();
 
         FileUtil util = new FileUtil();
 
-        if(!util.hasFile(path)){
-            showMessage("File not found!", "Stella Model Layer");
+        if (!util.hasFile(path)) {
+            view.showMessage("File not found!");
             return;
         }
 
         String json = "";
 
         try {
-             json = util.readFile(path);
+            json = util.readFile(path);
         } catch (Exception e) {
-            showMessage("ERROR: "+ e.getMessage(), "Stella Model Layer");
+            view.showMessage("Error: " + e.getMessage());
+            return;
         }
-
 
         ModelCreator creator = new ModelCreator(json);
         creator.create();
 
-
     }
 
-    private void generateByURL(){
+    private void generateByURL() {
 
+        String url = "http://api.wunderground.com/api/57dd9039b81a9c21/conditions/q/CA/San_Francisco.json";
+        Connection conn = new Connection();
 
+        String json = "";
+
+        try {
+           // json = conn.getUrlData(view.txtURL.getText().trim());
+            json = conn.getUrlData(url);
+        } catch (IOException e) {
+            view.showMessage("Error: " + e.getMessage());
+            return;
+        }
+
+        ModelCreator creator = new ModelCreator(json);
+        creator.create();
 
     }
-
-
-
-    private void showMessage(String message, String title){
-
-        ImageIcon ic = new ImageIcon("/icons/star_icon.png");
-
-        JOptionPane.showMessageDialog(view.panelMain,
-                message,
-                title,
-                JOptionPane.INFORMATION_MESSAGE,
-                ic);
-
-
-    }
-
 
 
 }

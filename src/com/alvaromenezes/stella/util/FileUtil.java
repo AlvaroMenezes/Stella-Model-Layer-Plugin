@@ -16,7 +16,7 @@ public class FileUtil {
 
     }
 
-    public void createNewFile(String path, String name, String text) throws Exception  {
+    public void createNewFile(String path, String name, String text) throws Exception {
 
         try {
             File file = new File(path + "//" + name + ".java");
@@ -27,7 +27,7 @@ public class FileUtil {
             output.write(text);
             output.close();
         } catch (IOException e) {
-            throw  e;
+            throw e;
         }
     }
 
