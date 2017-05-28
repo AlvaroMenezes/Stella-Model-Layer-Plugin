@@ -51,6 +51,15 @@ public class StellaForm implements ActionListener,ItemListener {
 
     private void onGenerate() {
 
+
+       /* ProgressDialog dialog = new ProgressDialog();
+        dialog.pack();
+        dialog.setLocationRelativeTo(panelMain);
+        dialog.setVisible(true);*/
+
+
+
+
         new StellaFormController(this).generate();
 
     }
@@ -89,10 +98,18 @@ public class StellaForm implements ActionListener,ItemListener {
 
 
         if(rbtRest.isSelected()){
-            showMessage("rest: " );
+
+            txtPath.setText("");
+            txtURL.setText("");
+
+            txtPath.setEnabled(false);
+            txtURL.setEnabled(true);
 
         }else if(rbtFile.isSelected()){
-            showMessage("file: " );
+            txtPath.setText("");
+            txtURL.setText("");
+            txtPath.setEnabled(true);
+            txtURL.setEnabled(false);
         }
 
     }

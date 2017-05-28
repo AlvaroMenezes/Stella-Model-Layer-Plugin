@@ -16,7 +16,7 @@ public class CreateAction extends AnAction {
         JFrame frame = new JFrame("Stella Model Layer");
         StellaForm form = new StellaForm();
         frame.setContentPane(form.panelMain);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
