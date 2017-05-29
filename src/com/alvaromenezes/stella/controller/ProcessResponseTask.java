@@ -1,48 +1,42 @@
 package com.alvaromenezes.stella.controller;
 
 
-import javax.swing.SwingWorker;
+import com.alvaromenezes.stella.util.Util;
+import com.alvaromenezes.stella.view.ProgressListener;
 
+import javax.swing.*;
 
 
 /**
- * 
  * @author Alvaro Menezes 28/05/2017
- *
  */
 public class ProcessResponseTask extends SwingWorker<Void, Void> {
 
-	private String text;
-	private ProgressListener dlg;
+    private String json;
+    private ProgressListener listener;
 
-	public ProcessResponseTask(String text, ProgressListener dlg) {
-		this.text = text;
-		this.dlg = dlg;
-	}
+    public ProcessResponseTask(String json, ProgressListener listener) {
+        this.json = json;
+        this.listener = listener;
+    }
 
-	@Override
-	protected Void doInBackground() throws Exception {
+    @Override
+    protected Void doInBackground() throws Exception {
+        Util.sleep(2000);
 
-		String textStr[] = text.split("\\r\\n|\\n|\\r");
-		
-		//dlg.resetProgress();
+        ModelCreator creator = new ModelCreator(json,listener);
+        creator.create();
 
-		int count = 0;
-		for (String line : textStr) {
-			//dlg.txtTitle.setText(String.format("  Process line %d", ++count));
-			
-			dlg.update(count, textStr.length);
-			System.out.println(line);
-			Thread.sleep(100);
-		}
+      //  listener.setAction("");
 
-		return null;
-	}
+        return null;
+    }
 
-	@Override
-	protected void done() {
-		//dlg.dispose();
-		//JOptionPane.showMessageDialog(dlg, "Done!", "Finish", JOptionPane.PLAIN_MESSAGE);
-	}
+    @Override
+    protected void done() {
+
+
+        JOptionPane.showMessageDialog(null, "Done!", "Finish", JOptionPane.PLAIN_MESSAGE);
+    }
 
 }

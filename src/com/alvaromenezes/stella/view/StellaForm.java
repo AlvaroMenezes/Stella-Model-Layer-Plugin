@@ -12,7 +12,7 @@ import java.awt.event.ItemListener;
 /**
  * Created by alvaromenezes on 5/17/17.
  */
-public class StellaForm implements ActionListener,ItemListener {
+public class StellaForm implements ActionListener, ItemListener {
 
 
     public JTextField txtPath;
@@ -24,18 +24,28 @@ public class StellaForm implements ActionListener,ItemListener {
     private JRadioButton rbtRest;
     private ButtonGroup buttonGroup;
 
+    private StellaFormController controller;
 
-    public StellaForm() {
+
+    public StellaForm(StellaFormController controller) {
+        this.controller = controller;
+        controller.setView(this);
+
+        addRadioGroup();
+        setListener();
+    }
+
+    private void addRadioGroup() {
         buttonGroup = new ButtonGroup();
         buttonGroup.add(rbtFile);
         buttonGroup.add(rbtRest);
+    }
 
+    private void setListener() {
         rbtFile.addItemListener(this);
         rbtRest.addItemListener(this);
-
         btnGenerate.addActionListener(this);
         btnPath.addActionListener(this);
-
     }
 
     @Override
@@ -50,16 +60,7 @@ public class StellaForm implements ActionListener,ItemListener {
 
 
     private void onGenerate() {
-
-
-       ProgressDialog dialog = new ProgressDialog();
-      //  dialog.pack();
-        dialog.setLocationRelativeTo(panelMain);
-        dialog.setVisible(true);
-
-
-       // new StellaFormController(this).generate();
-
+        controller.generate();
     }
 
 
@@ -94,8 +95,7 @@ public class StellaForm implements ActionListener,ItemListener {
     @Override
     public void itemStateChanged(ItemEvent e) {
 
-
-        if(rbtRest.isSelected()){
+        if (rbtRest.isSelected()) {
 
             txtPath.setText("");
             txtURL.setText("");
@@ -103,7 +103,7 @@ public class StellaForm implements ActionListener,ItemListener {
             txtPath.setEnabled(false);
             txtURL.setEnabled(true);
 
-        }else if(rbtFile.isSelected()){
+        } else if (rbtFile.isSelected()) {
             txtPath.setText("");
             txtURL.setText("");
             txtPath.setEnabled(true);

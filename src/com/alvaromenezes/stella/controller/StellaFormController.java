@@ -1,9 +1,9 @@
 package com.alvaromenezes.stella.controller;
 
 import com.alvaromenezes.stella.util.FileUtil;
+import com.alvaromenezes.stella.view.ProgressDialog;
 import com.alvaromenezes.stella.view.StellaForm;
-
-import java.io.IOException;
+import com.intellij.openapi.project.Project;
 
 /**
  * Created by alvaromenezes on 5/26/17.
@@ -12,19 +12,28 @@ public class StellaFormController {
 
 
     private StellaForm view;
+    private static Project project;
 
 
-    public StellaFormController(StellaForm view) {
+    public StellaFormController(Project project) {
 
-        this.view = view;
+        this.project = project;
 
     }
 
+    public static Project getProject() {
+        return project;
+    }
 
     private boolean isEmpty() {
 
         return view.txtPath.getText().trim().isEmpty() &&
                 view.txtURL.getText().trim().isEmpty();
+    }
+
+    public void setView(StellaForm view) {
+        this.view = view;
+
     }
 
 
@@ -36,9 +45,9 @@ public class StellaFormController {
             return;
         }
 
-        if(view.txtURL.getText().isEmpty()) {
+        if (view.txtURL.getText().isEmpty()) {
             generateByFile();
-        }else {
+        } else {
 
             generateByURL();
         }
@@ -67,30 +76,27 @@ public class StellaFormController {
             return;
         }
 
-        ModelCreator creator = new ModelCreator(json);
-        creator.create();
+        //ModelCreator creator = new ModelCreator(json);
+        //creator.create();
 
     }
 
     private void generateByURL() {
 
+       // String urlX = "https://publicobject.com/helloworld.txt";
         String url = "http://api.wunderground.com/api/57dd9039b81a9c21/conditions/q/CA/San_Francisco.json";
-        Connection conn = new Connection();
 
-        String json = "";
+        ProgressDialog dialog = new ProgressDialog();
+        dialog.setSize(240, 329);
+        dialog.setLocationRelativeTo(view.panelMain);
+        dialog.setDlgTitle("Downloading");
 
-        try {
-           // json = conn.getUrlData(view.txtURL.getText().trim());
-            json = conn.getUrlData(url);
-        } catch (IOException e) {
-            view.showMessage("Error: " + e.getMessage());
-            return;
-        }
 
-        ModelCreator creator = new ModelCreator(json);
-        creator.create();
+        DownloadTask task = new DownloadTask(url, dialog);
+        task.execute();
+
+        dialog.setVisible(true);
 
     }
-
 
 }
