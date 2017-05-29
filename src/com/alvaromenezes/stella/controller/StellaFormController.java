@@ -1,5 +1,6 @@
 package com.alvaromenezes.stella.controller;
 
+import com.alvaromenezes.stella.creator.ModelCreator;
 import com.alvaromenezes.stella.util.FileUtil;
 import com.alvaromenezes.stella.view.ProgressDialog;
 import com.alvaromenezes.stella.view.StellaForm;
@@ -76,8 +77,8 @@ public class StellaFormController {
             return;
         }
 
-        //ModelCreator creator = new ModelCreator(json);
-        //creator.create();
+        ModelCreator creator = new ModelCreator(json,null);
+        creator.create();
 
     }
 

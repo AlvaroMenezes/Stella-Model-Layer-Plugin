@@ -1,6 +1,7 @@
 package com.alvaromenezes.stella.view;
 
 import com.alvaromenezes.stella.controller.StellaFormController;
+import com.intellij.openapi.vfs.VirtualFile;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileSystemView;
@@ -61,6 +62,22 @@ public class StellaForm implements ActionListener, ItemListener {
 
     private void onGenerate() {
         controller.generate();
+
+/*
+     VirtualFile  file = StellaFormController.getProject().getBaseDir();
+
+        VirtualFile  file2 = file.findChild("src");
+        if(file2==null){
+            file2 = file.findChild("app");
+            file2 = file2.findChild("src");
+            file2 = file2.findChild("main");
+            file2 = file2.findChild("java");
+
+        }
+
+        System.out.println(file2.getCanonicalPath());
+
+*/
     }
 
 

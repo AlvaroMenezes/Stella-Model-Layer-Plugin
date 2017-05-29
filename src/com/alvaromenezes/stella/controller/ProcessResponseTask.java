@@ -1,6 +1,7 @@
 package com.alvaromenezes.stella.controller;
 
 
+import com.alvaromenezes.stella.creator.ModelCreator;
 import com.alvaromenezes.stella.util.Util;
 import com.alvaromenezes.stella.view.ProgressListener;
 
@@ -34,7 +35,6 @@ public class ProcessResponseTask extends SwingWorker<Void, Void> {
 
     @Override
     protected void done() {
-
 
         JOptionPane.showMessageDialog(null, "Done!", "Finish", JOptionPane.PLAIN_MESSAGE);
     }

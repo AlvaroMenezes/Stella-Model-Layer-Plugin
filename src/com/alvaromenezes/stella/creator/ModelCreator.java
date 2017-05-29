@@ -1,4 +1,4 @@
-package com.alvaromenezes.stella.controller;
+package com.alvaromenezes.stella.creator;
 
 import com.alvaromenezes.controller.ProcessJSON;
 import com.alvaromenezes.pojo.Attribute;
@@ -29,23 +29,8 @@ public class ModelCreator {
         listener.setDlgTitle("Generating model Layer");
         Util.sleep(2000);
 
-        for (Entity e : modelLayer.entities) {
-            Util.sleep(2000);
 
-            listener.setAction(String.format("Creating pojo "+e.name));
-
-          /*  for (Attribute a : e.attributes) {
-
-                if (!a.isArray) {
-
-                    System.out.println("       Atributo: " + a.dataType + "    " + a.name);
-                } else {
-                    System.out.println("       Atributo: array of " + a.dataType + "    " + a.name);
-                }
-
-            }*/
-
-        }
+        new PojoCreator(modelLayer,"ss/sss/sss/","com.alva.dfdf").process();
 
 
     }
