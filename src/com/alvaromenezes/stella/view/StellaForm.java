@@ -52,15 +52,13 @@ public class StellaForm implements ActionListener,ItemListener {
     private void onGenerate() {
 
 
-       /* ProgressDialog dialog = new ProgressDialog();
-        dialog.pack();
+       ProgressDialog dialog = new ProgressDialog();
+      //  dialog.pack();
         dialog.setLocationRelativeTo(panelMain);
-        dialog.setVisible(true);*/
+        dialog.setVisible(true);
 
 
-
-
-        new StellaFormController(this).generate();
+       // new StellaFormController(this).generate();
 
     }
 

@@ -29,10 +29,4 @@ public class ProgressDialog extends JDialog {
         dispose();
     }
 
-    public static void main(String[] args) {
-        ProgressDialog dialog = new ProgressDialog();
-        dialog.pack();
-        dialog.setVisible(true);
-        System.exit(0);
-    }
 }
