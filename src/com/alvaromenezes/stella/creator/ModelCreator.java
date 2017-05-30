@@ -1,8 +1,6 @@
 package com.alvaromenezes.stella.creator;
 
 import com.alvaromenezes.controller.ProcessJSON;
-import com.alvaromenezes.pojo.Attribute;
-import com.alvaromenezes.pojo.Entity;
 import com.alvaromenezes.pojo.ModelLayer;
 import com.alvaromenezes.stella.util.Util;
 import com.alvaromenezes.stella.view.ProgressListener;
@@ -18,7 +16,7 @@ public class ModelCreator {
 
 
     public ModelCreator(String json, ProgressListener listener) {
-        this.listener=listener;
+        this.listener = listener;
         this.listener.setDlgTitle("Parsing JSON");
         this.modelLayer = new ProcessJSON().getModelLayer(json);
     }
@@ -30,7 +28,7 @@ public class ModelCreator {
         Util.sleep(2000);
 
 
-        new PojoCreator(modelLayer,"ss/sss/sss/","com.alva.dfdf").process();
+        new PojoCreator(modelLayer, "ss/sss/sss/", "com.alva.dfdf").process();
 
 
     }

@@ -5,7 +5,6 @@ import com.alvaromenezes.pojo.Entity;
 import com.alvaromenezes.pojo.ModelLayer;
 import com.alvaromenezes.stella.util.FileUtil;
 
-import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -13,7 +12,7 @@ import java.util.*;
 /**
  * Created by alvaromenezes on 5/29/17.
  */
-public class PojoCreator  {
+public class PojoCreator {
 
 
     private ModelLayer model;
@@ -26,18 +25,19 @@ public class PojoCreator  {
     private final String TAB = "\t";
 
 
-    public  PojoCreator(ModelLayer model,String path, String packageName){
+    public PojoCreator(ModelLayer model, String path, String packageName) {
 
         this.model = model;
         this.path = path;
-        this.packageName =packageName;
+        this.packageName = packageName;
 
     }
 
 
-    public void process(){
+    public void process() {
 
-        List<Map<String, String>> pojos  = new ArrayList<Map<String, String>>();;
+        List<Map<String, String>> pojos = new ArrayList<Map<String, String>>();
+        ;
         for (Entity entity : model.entities) {
 
             Map<String, String> pojo = new HashMap<String, String>();
@@ -68,19 +68,19 @@ public class PojoCreator  {
 
 
         builder.append(String.format("public class %s {%s%s", entity.name, CRLF, CRLF));
-       // builder.append(String.format("public class %s extends DaoEntity {%s%s", entity.name, CRLF, CRLF));
+        // builder.append(String.format("public class %s extends DaoEntity {%s%s", entity.name, CRLF, CRLF));
 
         for (Attribute attribute : entity.attributes) {
 
             String type = attribute.dataType;
-            if(attribute.isArray){
-                type = String.format("List<%s>",attribute.dataType);
+            if (attribute.isArray) {
+                type = String.format("List<%s>", attribute.dataType);
             }
 
             builder.append(String.format("%spublic  %s %s;%s", TAB, type, attribute.name, CRLF));
         }
 
-        builder.append(String.format("%s%spublic %s(){%s%s}%s%s", CRLF,TAB, entity.name,CRLF,TAB, CRLF,CRLF));
+        builder.append(String.format("%s%spublic %s(){%s%s}%s%s", CRLF, TAB, entity.name, CRLF, TAB, CRLF, CRLF));
 
 
         builder.append(String.format("%spublic %s(%s){%s", TAB, entity.name, getConstructorParameters(entity), CRLF));
@@ -103,18 +103,18 @@ public class PojoCreator  {
                 return String.format("import java.util.List;%s%s", CRLF, CRLF);
             }
         }
-      return "";
+        return "";
     }
 
 
-    private String getDefaultHeader(){
+    private String getDefaultHeader() {
 
-        String today =   new SimpleDateFormat("dd/MM/yyyy").format(new Date());
+        String today = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
 
         StringBuilder builder = new StringBuilder();
         builder.append("/**");
         builder.append(CRLF);
-        builder.append("/**Created by Stella Model Layer Plugin on "+today);
+        builder.append("/**Created by Stella Model Layer Plugin on " + today);
         builder.append(CRLF);
         builder.append(" */");
         builder.append(CRLF);
@@ -128,16 +128,16 @@ public class PojoCreator  {
 
         for (Attribute attribute : entity.attributes) {
             String type = attribute.dataType;
-            if(attribute.isArray){
-                type = String.format("List<%s>",attribute.dataType);
+            if (attribute.isArray) {
+                type = String.format("List<%s>", attribute.dataType);
             }
 
             builder.append(String.format("%s %s,", type, attribute.name));
         }
 
         String s = builder.toString();
-        if(!s.isEmpty()){
-            s=s.substring(0, s.length() - 1);
+        if (!s.isEmpty()) {
+            s = s.substring(0, s.length() - 1);
         }
 
         return s;
@@ -156,9 +156,9 @@ public class PojoCreator  {
 */
         for (Map<String, String> pojo : pojos) {
 
-            System.out.println("----------------------------------------------------------" );
-            System.out.println("----------------  "+pojo.get(NAME).toString() );
-            System.out.println("----------------------------------------------------------" );
+            System.out.println("----------------------------------------------------------");
+            System.out.println("----------------  " + pojo.get(NAME).toString());
+            System.out.println("----------------------------------------------------------");
             System.out.println("");
             System.out.println("");
 
@@ -166,15 +166,15 @@ public class PojoCreator  {
             System.out.println("");
 
             System.out.println("");
-            System.out.println("----------------------------------------------------------" );
-            System.out.println("");System.out.println("");
+            System.out.println("----------------------------------------------------------");
+            System.out.println("");
+            System.out.println("");
 
-           // file.createNewFile(dir.getAbsolutePath(), pojo.get("fileName").toString(), pojo.get("body").toString());
+            // file.createNewFile(dir.getAbsolutePath(), pojo.get("fileName").toString(), pojo.get("body").toString());
 
         }
         System.out.println("Done!");
     }
-
 
 
 }

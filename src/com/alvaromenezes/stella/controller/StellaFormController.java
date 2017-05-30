@@ -19,7 +19,6 @@ public class StellaFormController {
     public StellaFormController(Project project) {
 
         this.project = project;
-
     }
 
     public static Project getProject() {
@@ -39,7 +38,6 @@ public class StellaFormController {
 
 
     public void generate() {
-
 
         if (isEmpty()) {
             view.showMessage("Add an URL or a file path!");
@@ -77,23 +75,19 @@ public class StellaFormController {
             return;
         }
 
-        ModelCreator creator = new ModelCreator(json,null);
+        ModelCreator creator = new ModelCreator(json, null);
         creator.create();
 
     }
 
     private void generateByURL() {
 
-       // String urlX = "https://publicobject.com/helloworld.txt";
-        String url = "http://api.wunderground.com/api/57dd9039b81a9c21/conditions/q/CA/San_Francisco.json";
-
         ProgressDialog dialog = new ProgressDialog();
         dialog.setSize(240, 329);
         dialog.setLocationRelativeTo(view.panelMain);
         dialog.setDlgTitle("Downloading");
 
-
-        DownloadTask task = new DownloadTask(url, dialog);
+        DownloadTask task = new DownloadTask(view.txtURL.getText(), dialog);
         task.execute();
 
         dialog.setVisible(true);

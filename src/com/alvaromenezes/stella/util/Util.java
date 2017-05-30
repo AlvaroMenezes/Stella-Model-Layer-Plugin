@@ -6,8 +6,7 @@ package com.alvaromenezes.stella.util;
 public class Util {
 
 
-
-    public static void sleep(int millis){
+    public static void sleep(int millis) {
         try {
             Thread.sleep(millis);
         } catch (InterruptedException e) {

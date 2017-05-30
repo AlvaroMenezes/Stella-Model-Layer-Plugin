@@ -25,10 +25,10 @@ public class ProcessResponseTask extends SwingWorker<Void, Void> {
     protected Void doInBackground() throws Exception {
         Util.sleep(2000);
 
-        ModelCreator creator = new ModelCreator(json,listener);
+        ModelCreator creator = new ModelCreator(json, listener);
         creator.create();
 
-      //  listener.setAction("");
+        //  listener.setAction("");
 
         return null;
     }
