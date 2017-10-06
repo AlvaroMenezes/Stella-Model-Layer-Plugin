@@ -44,14 +44,13 @@ public class StellaFormController {
             return;
         }
 
-        if (view.txtURL.getText().isEmpty()) {
+        if(view.rbtFile.isSelected()) {
             generateByFile();
-        } else {
-
+        } else if(view.rbtRest.isSelected()) {
             generateByURL();
         }
 
-        view.showMessage("Done!");
+
 
     }
 
@@ -75,21 +74,29 @@ public class StellaFormController {
             return;
         }
 
-        ModelCreator creator = new ModelCreator(json, null);
-        creator.create();
 
+
+        ProgressDialog dialog = getDialog("Reading file");
+        ProcessResponseTask task = new ProcessResponseTask(json, dialog);
+        task.execute();
+        dialog.setVisible(true);
+
+
+    }
+
+    private ProgressDialog getDialog(String title){
+        ProgressDialog dialog = new ProgressDialog();
+        dialog.setSize(240, 329);
+        dialog.setLocationRelativeTo(view.panelMain);
+        dialog.setDlgTitle(title);
+        return dialog;
     }
 
     private void generateByURL() {
 
-        ProgressDialog dialog = new ProgressDialog();
-        dialog.setSize(240, 329);
-        dialog.setLocationRelativeTo(view.panelMain);
-        dialog.setDlgTitle("Downloading");
-
+        ProgressDialog dialog = getDialog("Downloading");
         DownloadTask task = new DownloadTask(view.txtURL.getText(), dialog);
         task.execute();
-
         dialog.setVisible(true);
 
     }

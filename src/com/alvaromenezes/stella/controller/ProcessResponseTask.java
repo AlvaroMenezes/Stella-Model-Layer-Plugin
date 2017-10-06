@@ -23,12 +23,8 @@ public class ProcessResponseTask extends SwingWorker<Void, Void> {
 
     @Override
     protected Void doInBackground() throws Exception {
-        Util.sleep(2000);
-
         ModelCreator creator = new ModelCreator(json, listener);
         creator.create();
-
-        //  listener.setAction("");
 
         return null;
     }
@@ -36,6 +32,8 @@ public class ProcessResponseTask extends SwingWorker<Void, Void> {
     @Override
     protected void done() {
 
+        listener.dispose();
+        StellaFormController.getProject().getBaseDir().refresh(false,true);
         JOptionPane.showMessageDialog(null, "Done!", "Finish", JOptionPane.PLAIN_MESSAGE);
     }
 

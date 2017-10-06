@@ -11,4 +11,5 @@ public interface ProgressListener {
 
     void setAction(String action);
 
+    void dispose();
 }

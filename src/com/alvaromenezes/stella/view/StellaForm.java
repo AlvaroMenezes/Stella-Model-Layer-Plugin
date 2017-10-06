@@ -18,10 +18,10 @@ public class StellaForm implements ActionListener, ItemListener {
     public JTextField txtPath;
     public JTextField txtURL;
     public JPanel panelMain;
-    private JButton btnPath;
-    private JButton btnGenerate;
-    private JRadioButton rbtFile;
-    private JRadioButton rbtRest;
+    public JButton btnPath;
+    public JButton btnGenerate;
+    public JRadioButton rbtFile;
+    public JRadioButton rbtRest;
     private JTextField txtPackage;
     private ButtonGroup buttonGroup;
 
@@ -118,6 +118,8 @@ public class StellaForm implements ActionListener, ItemListener {
             txtPath.setEnabled(false);
             txtURL.setEnabled(true);
 
+            btnPath.setEnabled(false);
+
         } else if (rbtFile.isSelected()) {
             txtPath.setText("");
             txtURL.setText("");
@@ -127,6 +129,7 @@ public class StellaForm implements ActionListener, ItemListener {
 
             txtPath.setEnabled(true);
             txtURL.setEnabled(false);
+            btnPath.setEnabled(true);
         }
 
     }

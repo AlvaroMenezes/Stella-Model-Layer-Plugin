@@ -71,6 +71,8 @@ public class FileUtil {
             return dir.getCanonicalPath();
         }
 
+        dir = baseDir;
+
         String androidDirNames [] = {"app","src","main","java"};
 
         for (String name : androidDirNames) {
@@ -82,5 +84,6 @@ public class FileUtil {
 
         return dir.getCanonicalPath();
     }
+
 
 }

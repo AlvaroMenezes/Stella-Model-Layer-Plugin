@@ -25,9 +25,9 @@ public class ModelCreator {
     public void create() {
 
         listener.setDlgTitle("Generating model Layer");
-        Util.sleep(2000);
 
 
+//todo inserir dados
         new PojoCreator(modelLayer, "ss/sss/sss/", "com.alva.dfdf").process();
 
 

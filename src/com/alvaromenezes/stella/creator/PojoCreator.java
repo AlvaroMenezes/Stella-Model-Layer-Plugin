@@ -3,8 +3,10 @@ package com.alvaromenezes.stella.creator;
 import com.alvaromenezes.pojo.Attribute;
 import com.alvaromenezes.pojo.Entity;
 import com.alvaromenezes.pojo.ModelLayer;
+import com.alvaromenezes.stella.controller.StellaFormController;
 import com.alvaromenezes.stella.util.FileUtil;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -114,7 +116,7 @@ public class PojoCreator {
         StringBuilder builder = new StringBuilder();
         builder.append("/**");
         builder.append(CRLF);
-        builder.append("/**Created by Stella Model Layer Plugin on " + today);
+        builder.append("*    Created by Stella Model Layer Plugin on " + today);
         builder.append(CRLF);
         builder.append(" */");
         builder.append(CRLF);
@@ -146,34 +148,17 @@ public class PojoCreator {
 
     public void save(List<Map<String, String>> pojos) throws Exception {
 
-        FileUtil file = new FileUtil();
+        FileUtil util = new FileUtil();
 
-        System.out.println("Beginning Model Layer Creator");
-
-      /*  File dir = new File(String.format("%s/pojo",path));
+        String defaultPath = util.getDefaultPath();
+        File dir = new File(String.format("%s/pojo",defaultPath));
         if (!dir.exists())
             dir.mkdir();
-*/
+
         for (Map<String, String> pojo : pojos) {
-
-            System.out.println("----------------------------------------------------------");
-            System.out.println("----------------  " + pojo.get(NAME).toString());
-            System.out.println("----------------------------------------------------------");
-            System.out.println("");
-            System.out.println("");
-
-            System.out.println(pojo.get(BODY).toString());
-            System.out.println("");
-
-            System.out.println("");
-            System.out.println("----------------------------------------------------------");
-            System.out.println("");
-            System.out.println("");
-
-            // file.createNewFile(dir.getAbsolutePath(), pojo.get("fileName").toString(), pojo.get("body").toString());
-
+             util.createNewFile(dir.getAbsolutePath(), pojo.get(NAME).toString(), pojo.get(BODY).toString());
         }
-        System.out.println("Done!");
+
     }
 
 

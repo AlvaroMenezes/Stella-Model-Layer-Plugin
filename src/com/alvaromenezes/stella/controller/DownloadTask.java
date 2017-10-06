@@ -24,7 +24,6 @@ public class DownloadTask extends SwingWorker<String, Object> {
     @Override
     protected String doInBackground() throws Exception {
 
-        Util.sleep(2000);
         HttpClient client = new HttpClient(url, listener);
         return client.run();
     }
